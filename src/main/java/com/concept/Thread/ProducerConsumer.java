@@ -45,7 +45,6 @@ class Producer implements Runnable {
           try {
             lock.wait();
           } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
           }
         }
