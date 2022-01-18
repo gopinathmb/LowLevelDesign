@@ -1,4 +1,8 @@
 package cpm.lld.bms;
+
+import java.util.Date;
+import java.util.List;
+
 public class Show {
 
 	int showId;

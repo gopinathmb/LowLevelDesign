@@ -1,4 +1,7 @@
 package cpm.lld.bms;
+
+import java.util.Date;
+
 public class Payment {
 
 	double amount;

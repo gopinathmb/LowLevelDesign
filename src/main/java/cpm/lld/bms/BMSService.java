@@ -1,13 +1,19 @@
 package cpm.lld.bms;
 
+import java.util.Date;
 import java.util.List;
 
-public class BMSService  {
+public class BMSService {
 
-	List<CinemaHall> cinemas;
+  List<CinemaHall> cinemas;
 
-	public List<Movie> getMovies(Date date, String city);
-	public List<CinemaHall> getCinemalHalls(String city);
+  public List<Movie> getMovies(Date date, String city) {
+    return null;
+
+  }
+
+  public List<CinemaHall> getCinemalHalls(String city) {
+    return null;
+  }
 
 }
-

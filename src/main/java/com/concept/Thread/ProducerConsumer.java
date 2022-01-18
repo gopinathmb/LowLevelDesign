@@ -16,21 +16,21 @@ public class ProducerConsumer {
     Queue<Integer> q = new LinkedList<>();
     Object lock = new Object();
 
-    Thread producer = new Thread(new Producer(q, lock));
+    Thread producer = new Thread(new Producer1(q, lock));
     producer.start();
 
-    Thread consumer = new Thread(new Consumer(q, lock));
+    Thread consumer = new Thread(new Consumer1(q, lock));
     consumer.start();
   }
 
 }
 
-class Producer implements Runnable {
+class Producer1 implements Runnable {
 
   Queue<Integer> q;
   Object lock;
 
-  Producer(Queue<Integer> q, Object lock) {
+  Producer1(Queue<Integer> q, Object lock) {
     this.q = q;
     this.lock = lock;
   }
@@ -40,29 +40,37 @@ class Producer implements Runnable {
     int i = 1;
     while (true) {
       synchronized (lock) {
-        while (q.size() > 10) {
-          lock.notify();
+        while (q.size() > 1000) {
           try {
+            System.out.println("Queue is Full so waiting...");
             lock.wait();
           } catch (InterruptedException e) {
             e.printStackTrace();
           }
         }
         q.add(i);
+        
         System.out.println("Producer produced " + i++);
-        lock.notify();
+        lock.notifyAll();
       }
+//      try {
+//        Thread.sleep(1);
+//      } catch (InterruptedException e) {
+//        // TODO Auto-generated catch block
+//        e.printStackTrace();
+//      }
     }
+    
 
   }
 }
 
-class Consumer implements Runnable {
+class Consumer1 implements Runnable {
 
   Queue<Integer> q;
   Object lock;
 
-  Consumer(Queue<Integer> q, Object lock) {
+  Consumer1(Queue<Integer> q, Object lock) {
     this.q = q;
     this.lock = lock;
   }
@@ -72,8 +80,8 @@ class Consumer implements Runnable {
     while (true) {
       synchronized (lock) {
         while (q.isEmpty()) {
-          lock.notify();
           try {
+            System.out.println("Queue is empty so waiting...");
             lock.wait();
           } catch (InterruptedException e) {
             e.printStackTrace();
@@ -81,12 +89,17 @@ class Consumer implements Runnable {
         }
         Integer poll = q.poll();
         System.out.println("consumer consumed" + poll);
-        lock.notify();
-        if(poll==20)
-        {
-          break;
-        }
+        lock.notifyAll();
+//        if (poll == 20) {
+//          break;
+//        }
       }
+//    try {
+//    Thread.sleep(5);
+//  } catch (InterruptedException e) {
+//    // TODO Auto-generated catch block
+//    e.printStackTrace();
+//  }
     }
   }
 }

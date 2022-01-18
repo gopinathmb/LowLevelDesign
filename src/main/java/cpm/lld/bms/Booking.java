@@ -1,4 +1,8 @@
 package cpm.lld.bms;
+
+import java.util.Date;
+import java.util.List;
+
 public class Booking {
 
 	String bookingId;
@@ -11,7 +15,9 @@ public class Booking {
 	List<Seat> seats;
 	Payment paymentObj;
 
-	public boolean makePayment(Payment payment);
+	public boolean makePayment(Payment payment) {
+	  return false;
+	}
 
 }
 
