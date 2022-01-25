@@ -1,18 +1,13 @@
-/**
- * Created by gopinath_mb on Jan 15, 2022
- */
-package com.lld.parkinglot;
+package com.lld.parkinglot.vehicle;
 
-/**
- * @author gopinath_mb
- */
+import com.lld.parkinglot.payment.PaymentInfo;
+import com.lld.parkinglot.ticket.ParkingTicket;
+
 public class Vehicle {
 
-  String vehicleNo;
-
-  public Vehicle(String vehicleNo) {
-    super();
-    this.vehicleNo = vehicleNo;
-  }
+  String licenseNumber;
+  VehicleType vehicleType;
+  ParkingTicket parkingTicket;
+  PaymentInfo paymentInfo;
 
 }
