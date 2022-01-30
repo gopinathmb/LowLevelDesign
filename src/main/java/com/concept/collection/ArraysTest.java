@@ -17,8 +17,10 @@ public class ArraysTest {
     int[] arr = new int[2];
     List<int[]> asList2 = Arrays.asList(arr);
     System.out.println(asList2);
-    asList2.add(new int[] { 1 });
+//    asList2.add(new int[] { 1 });
     
     Arrays.sort( new Integer[] {1, 2, 3, 4},(a,b)->a-b);
+    System.out.println(-10%10);
+    System.out.println(13%10);
   }
 }

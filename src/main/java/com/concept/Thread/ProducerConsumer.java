@@ -38,9 +38,10 @@ class Producer1 implements Runnable {
   public void run() {
     System.out.println("Insider Producer..");
     int i = 1;
-    while (true) {
+    while (i < 100) {
+      sleep();
       synchronized (lock) {
-        while (q.size() > 1000) {
+        while (q.size() > 25) {
           try {
             System.out.println("Queue is Full so waiting...");
             lock.wait();
@@ -49,19 +50,23 @@ class Producer1 implements Runnable {
           }
         }
         q.add(i);
-        
         System.out.println("Producer produced " + i++);
         lock.notifyAll();
       }
-//      try {
-//        Thread.sleep(1);
-//      } catch (InterruptedException e) {
-//        // TODO Auto-generated catch block
-//        e.printStackTrace();
-//      }
     }
-    
 
+  }
+
+  /**
+   * 
+   */
+  private void sleep() {
+    try {
+      Thread.sleep(10);
+    } catch (InterruptedException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
   }
 }
 
@@ -69,6 +74,7 @@ class Consumer1 implements Runnable {
 
   Queue<Integer> q;
   Object lock;
+  int i = 0;
 
   Consumer1(Queue<Integer> q, Object lock) {
     this.q = q;
@@ -77,7 +83,8 @@ class Consumer1 implements Runnable {
 
   public void run() {
     System.out.println("Insider Consumer..");
-    while (true) {
+    while (i < 99) {
+      sleep();
       synchronized (lock) {
         while (q.isEmpty()) {
           try {
@@ -89,17 +96,17 @@ class Consumer1 implements Runnable {
         }
         Integer poll = q.poll();
         System.out.println("consumer consumed" + poll);
+        i++;
         lock.notifyAll();
-//        if (poll == 20) {
-//          break;
-//        }
       }
-//    try {
-//    Thread.sleep(5);
-//  } catch (InterruptedException e) {
-//    // TODO Auto-generated catch block
-//    e.printStackTrace();
-//  }
+    }
+  }
+  private void sleep() {
+    try {
+      Thread.sleep(50);
+    } catch (InterruptedException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
     }
   }
 }
