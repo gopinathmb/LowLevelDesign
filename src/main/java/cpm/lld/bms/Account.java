@@ -1,5 +1,6 @@
 package cpm.lld.bms;
-public class Account {
+public class Account 
+{
 
 	String userName;
 	String password;
